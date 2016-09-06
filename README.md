@@ -1,4 +1,4 @@
-# enode-dashboard is a customized version of [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/)
+# enode-dashboard is currently a customized version of [SB Admin 2](http://startbootstrap.com/template-overviews/sb-admin-2/)
 
 ## Getting Started
 
