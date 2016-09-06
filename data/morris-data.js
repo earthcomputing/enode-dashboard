@@ -3,52 +3,52 @@ $(function() {
     Morris.Area({
         element: 'morris-area-chart',
         data: [{
-            time: '133401',
+            time: '101101',
             enp2s0: 3401,
             enp6s0: 3400,
             enp7s0: 2647
         }, {
-            time: '133402',
+            time: '101102',
             enp2s0: 2778,
             enp6s0: 2294,
             enp7s0: 2441
         }, {
-            time: '133403',
+            time: '101103',
             enp2s0: 4912,
             enp6s0: 1969,
             enp7s0: 2501
         }, {
-            time: '133404',
+            time: '101104',
             enp2s0: 3767,
             enp6s0: 3597,
             enp7s0: 5689
         }, {
-            time: '133411',
+            time: '101111',
             enp2s0: 6810,
             enp6s0: 1914,
             enp7s0: 2293
         }, {
-            time: '133412',
+            time: '101112',
             enp2s0: 5670,
             enp6s0: 4293,
             enp7s0: 1881
         }, {
-            time: '133413',
+            time: '101113',
             enp2s0: 4820,
             enp6s0: 3795,
             enp7s0: 1588
         }, {
-            time: '133414',
+            time: '101114',
             enp2s0: 15073,
             enp6s0: 5967,
             enp7s0: 5175
         }, {
-            time: '133421',
+            time: '101121',
             enp2s0: 10687,
             enp6s0: 4460,
             enp7s0: 2028
         }, {
-            time: '133422',
+            time: '101122',
             enp2s0: 8432,
             enp6s0: 5713,
             enp7s0: 1791

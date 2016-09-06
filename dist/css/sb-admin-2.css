@@ -432,3 +432,15 @@ table.dataTable thead .sorting:after {
     border-left-width: 0;
   }
 }
+tr:nth-child(even).link-up  {
+  background-color: #66bb66;
+}
+tr:nth-child(odd).link-up {
+  background-color: #55aa55;
+}
+tr:nth-child(even).link-down {
+  background-color: #dd6666;
+}
+tr:nth-child(odd).link-down {
+  background-color: #aa5555;
+}
