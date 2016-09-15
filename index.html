@@ -1,13 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta http-equiv="refresh" content="0;url=pages/index.html">
-<title>Earth Admin</title>
-<script language="javascript">
-    window.location.href = "pages/index.html"
-</script>
+  <!--<meta http-equiv="refresh" content="0;url=index.html">-->
+  
+  <script src="js/d3.min.js" type="text/Javascript"></script>
+  <script src="node_modules/socket.io-client/socket.io.js" type="text/Javascript"></script>
+  <!--<script src="enode-client.js" type="text/Javascript"></script>-->
+  <title>Earth Admin</title>
+  <!-- <script language="javascript">
+       window.location.href = "pages/index.html"
+       </script> -->
+  <style>
+    .link-up  {
+    background-color: #55FF55;
+    }
+    
+    .link-down {
+    background-color: #FF5555;
+    } 
+    
+    
+    .link-wait {
+    background-color: #FF8800;
+    } 
+    
+  </style>
 </head>
 <body>
-Go to <a href="pages/index.html">/pages/index.html</a>
+  <div>
+    <svg class="link-down" id="enp2s0" style="height=200px;width=200px" />
+    enp2s0
+  </div>
+  <br/>
+  <br/>
+  <div>
+    <svg class="link-up" id="earth" style="height=200px;width=200px" />
+    earth
+  </div>
+  <script type="text/Javascript">
+    d3.select("#enp2s0").append("circle").attr("r", 50).attr("cx",150).attr("cy", 75).style("stroke", "black").style("stroke-width", "2px").style("fill", "blue");
+    d3.select("#earth").append("circle").attr("r", 50).attr("cx",150).attr("cy", 75).style("stroke", "black").style("stroke-width", "2px").style("fill", "red");
+
+    var socket = io("http://localhost:3000");
+
+    <!--console.log(socket);-->
+    
+    socket.on("enp2s0-update", function(data) {
+    console.log(data);
+    d3.select("#enp2s0").attr("class", data.linkState);
+    });
+
+    socket.on("earth-update", function(data) {
+    console.log(data);
+    d3.select("#earth").attr("class", data.linkState);
+    });
+    
+  </script>
 </body>
 </html>
