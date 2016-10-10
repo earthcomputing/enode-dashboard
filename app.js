@@ -4,62 +4,41 @@ var app = express();
 var io = require('socket.io');
 
 var server = require('http').Server(app);
+var bodyParser = require('body-parser');
 
 app.use('/', express.static(path.join(__dirname, '/')));
+app.use(bodyParser.json());
 
 server.listen(3000);
 var l = io.listen(server);
-var data = {'linkState': 'link-down'};
+var data = {"deviceName": "enp6s0",
+	    "linkState": "DOWN",
+	    "entlState":"IDLE",
+	    "entlCount":"0",
+	    "AITMessage":"-none-"
+	   };
 
 app.get('/', function (req, res) {
 	res.sendFile('/index.html');
     });
 
-// tcp connection state
-app.put('/enp2s0Up', function (req, res) {
-    data = {'linkState': 'link-up'};
-    enp2s0Update(l.sockets, data);
-    res.end();
-});
 
-app.put('/enp2s0Wait', function (req, res) {
-    data = {'linkState': 'link-wait'};
-    enp2s0Update(l.sockets, data);
-    res.end();
-});
-
-app.put('/enp2s0Down', function (req, res) {
-    data = {'linkState': 'link-down'};
-    enp2s0Update(l.sockets, data);
-    res.end();
-});
-
-// earth connection state
-app.put('/earthUp', function (req, res) {
-    data = {'linkState': 'link-up'};
-    earthUpdate(l.sockets, data);
-    res.end();
-});
-
-app.put('/earthWait', function (req, res) {
-    data = {'linkState': 'link-wait'};
-    earthUpdate(l.sockets, data);
-    res.end();
-});
-
-app.put('/earthDown', function (req, res) {
-    data = {'linkState': 'link-down'};
-    earthUpdate(l.sockets, data);
+app.put('/earthUpdate', function (req, res) {
+    earthUpdate(l.sockets,req.body);
     res.end();
 });
 
 
 l.sockets.on("connection", function(socket) {
     earthUpdate(socket, data);
-    enp2s0Update(socket, data);
+    //    enp2s0Update(socket, data);
+    
+    socket.on("aitMessage", function(data){
+	console.log("in AIT handler");
+	earthAITMessage(socket, data);
+});
     
 });
-
 
 // update function for tcp-connect update
 function enp2s0Update (socket, data) {
@@ -74,3 +53,10 @@ function earthUpdate (socket, data) {
     socket.emit("earth-update", data);
 } 
 
+
+function earthAITMessage(socket, data) {
+    console.log(data);
+    // send Message to NAL using AIT
+    //socket.emit("earth-ait-done", data);
+    
+}
